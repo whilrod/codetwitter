@@ -37,4 +37,5 @@ func Registro(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Ocurrió un error al intentar realizar el registro de usuario", 400)
 	}
 	w.WriteHeader(http.StatusCreated)
+	http.Error(w, "Datos registrados correctamente", 201)
 }
