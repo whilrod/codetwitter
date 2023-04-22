@@ -11,6 +11,7 @@ import (
 
 func Login(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("content-type", "application/json")
+	//w.Header().Add("Authorization", "Bearer")
 	var t models.Usuario
 	err := json.NewDecoder(r.Body).Decode(&t)
 	if err != nil {
@@ -37,10 +38,12 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("content-type", "application/json")
+
+	//http.Error(w, "Aquí pasé", http.StatusAccepted)
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(resp)
 
-	expirationTime := time.Now().Add(24 * time.Hour)
+	expirationTime := time.Now().Add(1 * time.Hour)
 	http.SetCookie(w, &http.Cookie{
 		Name:    "token",
 		Value:   jwtKey,
